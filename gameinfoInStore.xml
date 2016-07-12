@@ -1,0 +1,117 @@
+<a:feed xmlns:a="http://www.w3.org/2005/Atom" xmlns:os="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://schemas.zune.net/catalog/apps/2008/02">
+<a:link rel="self" type="application/atom+xml" href="/v8/catalog/apps/66489b35-5fbe-4e7a-8048-2928d1da5f66?os=8.0.10211.0&cc=AU&lang=en-US"/>
+<a:updated>2016-07-08T17:53:48.108662Z</a:updated>
+<a:title type="text">Shoot Bubble II</a:title>
+<a:id>urn:uuid:66489b35-5fbe-4e7a-8048-2928d1da5f66</a:id>
+<a:content type="html">
+The new exciting sequel to the highly popular Bubble Shooter game Bubble Bust! - loved by tens of millions of players! With 5 amazing worlds featuring more than 150 levels (all free!) and more than 30 unique Bubbles you will have tons of Free Bubble Shooting fun! Fireballs, bumpers and other powerful new boosters will help you defeat the 20+ bosses and other great challenges! KEY FEATURES: * 5 worlds with tons of levels of Bubble Popping Fun! * 21 challenging bosses * Over 30 unique Bubbles to discover * Powerful new boosters * 30+ achievements to unlock
+</a:content>
+<iapCount>-1</iapCount>
+<sortTitle>Shoot Bubble II</sortTitle>
+<releaseDate>2016-05-23T07:09:07.418000Z</releaseDate>
+<visibilityStatus>Live</visibilityStatus>
+<publisher>XISIV</publisher>
+<averageUserRating>0</averageUserRating>
+<userRatingCount>0</userRatingCount>
+<image>
+<id>urn:uuid:6b34f32f-2349-4bd6-a011-eba32ae878fd</id>
+</image>
+<screenshots>
+<screenshot>
+<id>urn:uuid:c1e39bf2-9023-40cc-af5a-ca22ac9b2f24</id>
+<orientation>0</orientation>
+</screenshot>
+<screenshot>
+<id>urn:uuid:79b39b78-1531-415e-86f7-9c2485202363</id>
+<orientation>0</orientation>
+</screenshot>
+<screenshot>
+<id>urn:uuid:91f6cf6d-b209-4358-b273-354c115e206b</id>
+<orientation>0</orientation>
+</screenshot>
+<screenshot>
+<id>urn:uuid:c7bfa8cf-6a03-4fd7-87ad-57b69a868780</id>
+<orientation>0</orientation>
+</screenshot>
+<screenshot>
+<id>urn:uuid:e3efae39-6b1d-46da-ab47-9720d98da739</id>
+<orientation>0</orientation>
+</screenshot>
+<screenshot>
+<id>urn:uuid:726cbde9-b580-4a29-b2ce-ce24826014ba</id>
+<orientation>0</orientation>
+</screenshot>
+</screenshots>
+<categories>
+<category>
+<id>windowsphone.Games</id>
+<title>games</title>
+<isRoot>True</isRoot>
+</category>
+<category>
+<id>windowsphone.PuzzleAndTrivia</id>
+<title>puzzle + trivia</title>
+<isRoot>False</isRoot>
+<parentId>windowsphone.Games</parentId>
+</category>
+</categories>
+<tags>
+<tag>Independent</tag>
+</tags>
+<offers>
+<offer>
+<offerId>urn:uuid:9d7e6f32-7ada-42b5-8bdf-9f669b9d17be</offerId>
+<mediaInstanceId>urn:uuid:197d2a03-1111-492d-8ceb-03640a128de2</mediaInstanceId>
+<clientTypes>
+<clientType>WindowsPhone80</clientType>
+<clientType>WindowsPhone81</clientType>
+</clientTypes>
+<paymentTypes>
+<paymentType>Credit Card</paymentType>
+<paymentType>Mobile Operator</paymentType>
+</paymentTypes>
+<store>ZEST</store>
+<price>0</price>
+<displayPrice>$0.00</displayPrice>
+<priceCurrencyCode>AUD</priceCurrencyCode>
+<licenseRight>Purchase</licenseRight>
+<expiration>2100-01-01T08:00:00Z</expiration>
+</offer>
+</offers>
+<taxString>price may include taxes</taxString>
+<backgroundImage/>
+<publisherId>XISIV</publisherId>
+<publisherGuid>urn:uuid:be944681-d682-4754-b8d0-15f329fddfbe</publisherGuid>
+<a:entry>
+<a:updated>2016-07-08T17:53:48.108662Z</a:updated>
+<a:title type="text">Shoot Bubble II 1.3.0.0</a:title>
+<a:id>urn:uuid:197d2a03-1111-492d-8ceb-03640a128de2</a:id>
+<version>1.3.0.0</version>
+<payloadId>urn:uuid:2a71dc14-1d26-487f-9f7a-65b39df38ae8</payloadId>
+<skuId>urn:uuid:197d2a03-1111-492d-8ceb-03640a128de2</skuId>
+<skuLastUpdated>2016-06-14T04:48:58.417865Z</skuLastUpdated>
+<isAvailableInCountry>true</isAvailableInCountry>
+<isAvailableInStore>true</isAvailableInStore>
+<isClientTypeCompatible>true</isClientTypeCompatible>
+<isHardwareCompatible>true</isHardwareCompatible>
+<isBlacklisted>false</isBlacklisted>
+<url>
+http://cdn.marketplacecontent.windowsphone.com/public/94ca51d5-29dd-44a6-a892-a0b78f40b6f6
+</url>
+<packageSize>29318266</packageSize>
+<installSize>106792960</installSize>
+<clientTypes>
+<clientType>WindowsPhone80</clientType>
+<clientType>WindowsPhone81</clientType>
+</clientTypes>
+<supportedLanguages>
+<supportedLanguage>English (United States)</supportedLanguage>
+</supportedLanguages>
+<deviceCapabilities>
+<hwCapability><requirementType>Resolution</requirementType><id>ID_RESOLUTION_WVGA</id><string>WVGA (480x800)</string><required>true</required></hwCapability><hwCapability><requirementType>Resolution</requirementType><id>ID_RESOLUTION_WXGA</id><string>WXGA (768x1280)</string><required>true</required></hwCapability><hwCapability><requirementType>Resolution</requirementType><id>ID_RESOLUTION_HD720P</id><string>HD720P (720x1280)</string><required>true</required></hwCapability><capability><id>ID_FNCTL_LIVETILE</id><string></string><disclosure>DoNotShow</disclosure></capability><capability><id>ID_CAP_MEDIALIB_AUDIO</id><string>music library</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_MEDIALIB_PLAYBACK</id><string>media playback</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_NETWORKING</id><string>data services</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_SENSORS</id><string>movement and directional sensor</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_PUSH_NOTIFICATION</id><string>push notification service</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_WEBBROWSERCOMPONENT</id><string>web browser component</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_IDENTITY_DEVICE</id><string>phone identity</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_IDENTITY_USER</id><string>owner identity</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_MEDIALIB_PHOTO</id><string>photos library</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_MICROPHONE</id><string>microphone</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_PHONEDIALER</id><string>phone dialer</string><disclosure>Disclose</disclosure></capability><capability><id>ID_CAP_LOCATION</id><string>location services</string><disclosure>DiscloseANDPrompt</disclosure></capability>
+</deviceCapabilities>
+</a:entry>
+<a:author>
+<a:name>Microsoft Corporation</a:name>
+</a:author>
+</a:feed>
