@@ -22,6 +22,7 @@ namespace TestControl
             List<NewsInfoForJson> n8 = HtmlHelper.GetNewsInfoList("http://www.windowscentral.com/windows-10?utm_medium=navbar&utm_campaign=navigation&utm_source=wc");
             List<NewsInfoForJson> n9 = HtmlHelper.GetNewsInfoList("http://www.windowscentral.com/microsoft-hololens?utm_medium=navbar&utm_campaign=navigation&utm_source=wc");
             List<NewsInfoForJson> n10 = HtmlHelper.GetNewsInfoList("http://www.windowscentral.com/microsoft-band-2?utm_medium=navbar&utm_campaign=navigation&utm_source=wc");
+
             //List<NewsInfoForJson> n11 = HtmlHelper.GetNewsInfoList("http://www.windowscentral.com/windows-phone");
             //List<NewsInfoForJson> n12 = HtmlHelper.GetNewsInfoList("http://www.windowscentral.com/windows-phone");
             //List<NewsInfoForJson> n13 = HtmlHelper.GetNewsInfoList("http://www.windowscentral.com/windows-phone");

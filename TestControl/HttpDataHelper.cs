@@ -25,7 +25,7 @@ namespace TestControl
                                                         news.Titlepic,news.Title,news.NewsForm,news.NewsTime,news.Onclick,news.ClassName,news.Filename,news.Classid,news.IsHearder,news.newstext,news.befrom,news.isbottom);
 
                    //string result = HttpHelper.HTTP_POST("http://localhost:21422/RecommendGames.aspx", dataStr);
-                   string result = HttpHelper.HTTP_POST("http://recommendgames.pettostudio.net/RecommendGames.aspx", dataStr);
+                   string result = HttpHelper.HTTP_POST("http://recommendgames2.pettostudio.net/RecommendGames.aspx", dataStr);
                    if (result.ToLower() != "200:ok")
                    {
                        throw new Exception(result);

@@ -17,7 +17,8 @@ namespace RecommendGameGod.Utility
             try
             {
                 gameModel.GameType = HttpUtility.UrlEncode(gameModel.GameType);
-                gameModel.GameDetails = HttpUtility.UrlEncode(gameModel.GameDetails);
+                gameModel.GameName = HttpUtility.UrlEncode(HttpUtility.HtmlEncode(gameModel.GameName));
+                gameModel.GameDetails = HttpUtility.UrlEncode(HttpUtility.HtmlEncode(gameModel.GameDetails));
                 gameModel.LogoPath = HttpUtility.UrlEncode(gameModel.LogoPath);
                 gameModel.HeadImage = HttpUtility.UrlEncode(gameModel.HeadImage);
 
@@ -36,6 +37,7 @@ namespace RecommendGameGod.Utility
                                                gameModel.Price, gameModel.FileSize, gameModel.Starts, gameModel.HeadImage, gameModel.Rating, gameModel.Images1, gameModel.Images2, gameModel.Images3, gameModel.Images4, gameModel.Images5, gameModel.Images6, gameModel.Images7, gameModel.Images8, gameModel.PhoneVersion);
 
                 string result = HttpHelper.HTTP_POST("http://recommendgames.pettostudio.net/RecommendGames.aspx", dataStr);
+                //string result = HttpHelper.HTTP_POST("http://localhost:21422/RecommendGames.aspx", dataStr);
                 if (result.ToLower() != "200:ok")
                 {
                     throw new Exception(result);

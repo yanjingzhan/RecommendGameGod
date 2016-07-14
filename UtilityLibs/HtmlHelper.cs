@@ -74,6 +74,13 @@ namespace UtilityLibs
                 newsModel_t.newstext = contentNode.OuterHtml;
             }
 
+            HtmlAgilityPack.HtmlNode articleTimeNode = doc.DocumentNode.SelectSingleNode("//time[@class=\"article-time\"]");
+            if (contentNode != null)
+            {
+                newsModel_t.NewsTime = articleTimeNode.InnerText.Replace(" at ", " ").Replace(" EDT","");
+                newsModel_t.NewsTime = DateTime.Parse(newsModel_t.NewsTime).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+
             HtmlAgilityPack.HtmlNodeCollection nodeCollection = doc.DocumentNode.SelectNodes("//a[@class=\"cta large\"]");
             if (nodeCollection != null && nodeCollection.Count > 0)
             {
@@ -88,12 +95,17 @@ namespace UtilityLibs
                             index_1 > 0 ? url_t.Substring(index_0, index_1 - index_0) : url_t.Substring(index_0));
 
                         int index_2 = fileName_t.LastIndexOf("&ourl=http");
-                        if(index_2 > 0)
+                        if (index_2 > 0)
                         {
                             newsModel_t.Filename = fileName_t.Substring(0, index_2);
                         }
-                        
+                        else
+                        {
+                            newsModel_t.Filename = fileName_t;
+                        }
                         newsModel_t.NewsForm = "pingce";
+
+                        Console.WriteLine("url:" + newsModel_t.Filename);
                     }
                 }
             }
