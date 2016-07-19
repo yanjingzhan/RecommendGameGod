@@ -81,5 +81,67 @@ namespace RecommendGameGod.Utility
                 throw;
             }
         }
+
+        public static List<GameModel> GetGameList()
+        {
+            WebClient wc = new WebClient();
+
+            try
+            {
+                string timeAuth = DateTime.Now.Millisecond.ToString();
+                string cryptStr = Encryption.Encrypt("getgamelist" + timeAuth);
+
+                string result_str = wc.DownloadString(
+                    string.Format("http://recommendgames.pettostudio.net/RecommendGames.aspx?action=getgamelist&getCount=1000&pageNumber=0&rd={0}&auth={1}", timeAuth, cryptStr));
+                List<GameModel> result = JsonHelper.DeserializeObjectFromJson<List<GameModel>>(Encryption.Decrypt(result_str));
+
+                foreach (var gameModel in result)
+                {
+                    gameModel.GameType = HttpUtility.UrlDecode(gameModel.GameType);
+                    gameModel.GameDetails = HttpUtility.HtmlDecode(HttpUtility.UrlDecode(gameModel.GameDetails));
+                    gameModel.GameName = HttpUtility.HtmlDecode(HttpUtility.UrlDecode(gameModel.GameName));
+                    gameModel.LogoPath = HttpUtility.UrlDecode(gameModel.LogoPath);
+                    gameModel.HeadImage = HttpUtility.UrlDecode(gameModel.HeadImage);
+
+                    gameModel.Images1 = HttpUtility.UrlDecode(gameModel.Images1);
+                    gameModel.Images2 = HttpUtility.UrlDecode(gameModel.Images2);
+                    gameModel.Images3 = HttpUtility.UrlDecode(gameModel.Images3);
+                    gameModel.Images4 = HttpUtility.UrlDecode(gameModel.Images4);
+                    gameModel.Images5 = HttpUtility.UrlDecode(gameModel.Images5);
+                    gameModel.Images6 = HttpUtility.UrlDecode(gameModel.Images6);
+                    gameModel.Images7 = HttpUtility.UrlDecode(gameModel.Images7);
+                    gameModel.Images8 = HttpUtility.UrlDecode(gameModel.Images8);
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static void UpdateOrderForGame(List<GameModel> gameList)
+        {
+            try
+            {
+                string timeAuth = DateTime.Now.Millisecond.ToString();
+                string cryptStr = Encryption.Encrypt("updateorderforgame" + timeAuth);
+                string dataString = string.Format("action=updateorderforgame&gameListJson={0}&rd={1}&auth={2}",
+                                               JsonHelper.SerializerToJson(gameList), timeAuth, cryptStr);
+                string result = HttpHelper.HTTP_POST("http://recommendgames.pettostudio.net/RecommendGames.aspx", dataString);
+
+                if (result.ToLower() != "200:ok")
+                {
+                    throw new Exception(result);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using UtilityLibs;
 
@@ -60,6 +61,8 @@ namespace RecommendGameGod
             }
         }
 
+
+        #region Add
 
         private string CheckControlState()
         {
@@ -418,7 +421,11 @@ namespace RecommendGameGod
             }
 
             GameInfoInStore gameInfo_t = XMLHelper.GetGameInfoInStore(HttpDataHelper.GetGameXMLInfo(this.textBox_GameID.Text));
-            this.dateTimePicker_UpdateTime.Value = DateTime.Parse(gameInfo_t.Updated.Replace("T", " ").Replace("Z", ""));
+
+            DateTime dt_t = DateTime.Now;
+            DateTime.TryParse(gameInfo_t.Updated.Replace("T", " ").Replace("Z", ""), out dt_t);
+            this.dateTimePicker_UpdateTime.Value = dt_t.Year > 2010 ? dt_t : DateTime.Now;
+
             this.textBox_DownloadCount.Text = new Random().Next(1500, 8000).ToString();
             this.textBox_FileSize.Text = gameInfo_t.PackageSize;
             this.textBox_GameDetails.Text = gameInfo_t.Content;
@@ -436,10 +443,18 @@ namespace RecommendGameGod
             {
                 this.comboBox_PhoneVersion.Text = "WP7";
             }
+            else if (gameInfo_t.ClientTypes.Contains("WindowsPhone80") || gameInfo_t.ClientTypes.Contains("WindowsPhone81"))
+            {
+                this.comboBox_PhoneVersion.Text = "WP8";
+            }
+            else
+            {
+                this.comboBox_PhoneVersion.Text = "Win10";
+            }
 
             for (int i = 0; i < this.comboBox_GameType.Items.Count; i++)
             {
-                if(this.comboBox_GameType.GetItemText(this.comboBox_GameType.Items[i]).ToLower() == gameInfo_t.Category.ToLower())
+                if (this.comboBox_GameType.GetItemText(this.comboBox_GameType.Items[i]).ToLower() == gameInfo_t.Category.ToLower())
                 {
                     this.comboBox_GameType.SelectedIndex = i;
                 }
@@ -448,5 +463,192 @@ namespace RecommendGameGod
             SetInfo("自动填写完毕，请提交！");
         }
 
+        #endregion
+
+        #region Edit
+
+        private void SetEditInfo(string msg)
+        {
+            this.textBox_Edit_Info.AppendText(DateTime.Now.ToString() + "," + msg);
+            this.textBox_Edit_Info.AppendText(Environment.NewLine);
+        }
+
+        public void shit()
+        {
+            //this.listView_GameList.Items.Add(new ListViewItem{d})
+        }
+
+
+        #endregion
+
+        private List<GameModel> _gameList;
+
+        private async void button_Edit_GetGameList_Click(object sender, EventArgs e)
+        {
+            columnHeader_Name.Width = 250;
+            columnHeader_GameType.Width = 180;
+
+            SetEditInfo("正在获取游戏列表...");
+            await Task.Delay(TimeSpan.FromSeconds(0.1));
+
+            _gameList = HttpDataHelper.GetGameList();
+
+            if (_gameList == null)
+            {
+                SetEditInfo("获取游戏失败.");
+            }
+
+            this.listView_GameList.Items.Clear();
+
+            int count = 1;
+            foreach (var item in _gameList)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.SubItems[0] = new ListViewItem.ListViewSubItem { Text = (count++).ToString() };
+                lvi.SubItems.Add(item.GameName);
+                lvi.SubItems.Add(item.GameType);
+                lvi.SubItems.Add(item.PhoneVersion);
+                lvi.SubItems.Add(item.Order.ToString());
+                lvi.SubItems.Add(item.GameDetails);
+                lvi.SubItems.Add(item.ID);
+
+                this.listView_GameList.Items.Add(lvi);
+            }
+
+            SetEditInfo("获取游戏列表完成");
+        }
+
+        private void button_Edit_OrderMoveUp_Click(object sender, EventArgs e)
+        {
+            if (this.listView_GameList.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            ListViewItem item = this.listView_GameList.SelectedItems[0];
+            int CurrentIndex = item.Index;
+            if (!CurrentIndex.Equals(0))
+            {
+                this.listView_GameList.BeginUpdate();
+
+                ListViewItem i = (ListViewItem)this.listView_GameList.Items[CurrentIndex - 1].Clone();
+                this.listView_GameList.Items[CurrentIndex - 1] = (ListViewItem)this.listView_GameList.Items[CurrentIndex].Clone();
+                this.listView_GameList.Items[CurrentIndex] = i;
+
+                string order_t = this.listView_GameList.Items[CurrentIndex].SubItems[4].Text;
+                this.listView_GameList.Items[CurrentIndex].SubItems[4].Text = this.listView_GameList.Items[CurrentIndex - 1].SubItems[4].Text;
+                this.listView_GameList.Items[CurrentIndex - 1].SubItems[4].Text = order_t;
+
+                this.listView_GameList.Items[CurrentIndex - 1].Selected = true;
+
+                this.listView_GameList.EndUpdate();
+
+                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex - 1].SubItems[6].Text,
+                    this.listView_GameList.Items[CurrentIndex - 1].SubItems[4].Text);
+
+                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex].SubItems[6].Text,
+                    this.listView_GameList.Items[CurrentIndex].SubItems[4].Text);
+
+                this.listView_GameList.Items[CurrentIndex - 1].EnsureVisible();
+            }
+
+            this.listView_GameList.Focus();
+        }
+
+        private void button_Edit_OrderMoveDown_Click(object sender, EventArgs e)
+        {
+            if (this.listView_GameList.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            ListViewItem item = this.listView_GameList.SelectedItems[0];
+            int CurrentIndex = item.Index;
+            if (!CurrentIndex.Equals(this.listView_GameList.Items.Count - 1))
+            {
+                this.listView_GameList.BeginUpdate();
+
+                ListViewItem i = (ListViewItem)this.listView_GameList.Items[CurrentIndex + 1].Clone();
+                this.listView_GameList.Items[CurrentIndex + 1] = (ListViewItem)this.listView_GameList.Items[CurrentIndex].Clone();
+                this.listView_GameList.Items[CurrentIndex] = i;
+
+                string order_t = this.listView_GameList.Items[CurrentIndex].SubItems[4].Text;
+                this.listView_GameList.Items[CurrentIndex].SubItems[4].Text = this.listView_GameList.Items[CurrentIndex + 1].SubItems[4].Text;
+                this.listView_GameList.Items[CurrentIndex + 1].SubItems[4].Text = order_t;
+
+                this.listView_GameList.Items[CurrentIndex + 1].Selected = true;
+
+                this.listView_GameList.EndUpdate();
+
+                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex + 1].SubItems[6].Text,
+                    this.listView_GameList.Items[CurrentIndex + 1].SubItems[4].Text);
+
+                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex].SubItems[6].Text,
+                    this.listView_GameList.Items[CurrentIndex].SubItems[4].Text);
+
+                this.listView_GameList.Items[CurrentIndex + 1].EnsureVisible();
+            }
+
+            this.listView_GameList.Focus();
+        }
+
+        private void UpdateGameListOrderById(string id, string order)
+        {
+            foreach (var item in _gameList)
+            {
+                if (item.ID == id)
+                {
+                    item.Order = int.Parse(order);
+                    return;
+                }
+            }
+        }
+
+        private void button_Edit_TopOrder_Click(object sender, EventArgs e)
+        {
+            int index = this.listView_GameList.SelectedIndices[0];
+            for (int i = 0; i < index; i++)
+            {
+                button_Edit_OrderMoveUp_Click(sender, e);
+            }
+            this.listView_GameList.Focus();
+        }
+
+        private void button_Edit_OrderBottom_Click(object sender, EventArgs e)
+        {
+            int index = this.listView_GameList.Items.Count - 1 - this.listView_GameList.SelectedIndices[0];
+            for (int i = 0; i < index; i++)
+            {
+                button_Edit_OrderMoveDown_Click(sender, e);
+            }
+            this.listView_GameList.Focus();
+        }
+
+        private async void button_Edit_UpdateGameList_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确定更新整个列表？会比较慢哦", "tips", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+
+                try
+                {
+                    SetEditInfo("正在更新...");
+                    await Task.Delay(TimeSpan.FromSeconds(0.1));
+
+
+                    List<GameModel> gl_t = new List<GameModel>();
+
+                    foreach (var item in _gameList)
+                    {
+                        gl_t.Add(new GameModel { ID = item.ID, Order = item.Order });
+                    }
+
+                    HttpDataHelper.UpdateOrderForGame(gl_t);
+
+                    SetEditInfo("更新成功...");
+                }
+                catch (Exception ex)
+                { SetEditInfo("更新失败," + ex.Message); }
+            }
+        }
     }
 }

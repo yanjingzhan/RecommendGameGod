@@ -34,5 +34,7 @@ namespace Models
         public string PhoneVersion { get; set; }
 
         public string ID { get; set; }
+        public int Order { get; set; }
+
     }
 }
