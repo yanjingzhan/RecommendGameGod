@@ -16,6 +16,9 @@ namespace RecommendGameGod.Utility
         {
             try
             {
+                string timeAuth = DateTime.Now.Millisecond.ToString();
+                string cryptStr = Encryption.Encrypt("addgames" + timeAuth);
+
                 gameModel.GameType = HttpUtility.UrlEncode(gameModel.GameType);
                 gameModel.GameName = HttpUtility.UrlEncode(HttpUtility.HtmlEncode(gameModel.GameName));
                 gameModel.GameDetails = HttpUtility.UrlEncode(HttpUtility.HtmlEncode(gameModel.GameDetails));
@@ -32,9 +35,10 @@ namespace RecommendGameGod.Utility
                 gameModel.Images8 = HttpUtility.UrlEncode(gameModel.Images8);
 
                 string dataStr = string.Format("action={0}&gametype={1}&gamename={2}&version={3}&gameid={4}&pushername={5}&updatetime={6}&gamedetails={7}&logopath={8}&sourcetype={9}&downloadcount={10}"
-                                               + "&price={11}&filesize={12}&starts={13}&headimage={14}&rating={15}&images1={16}&images2={17}&images3={18}&images4={19}&images5={20}&images6={21}&images7={22}&images8={23}&phoneversion={24}",
+                                               + "&price={11}&filesize={12}&starts={13}&headimage={14}&rating={15}&images1={16}&images2={17}&images3={18}&images4={19}&images5={20}&images6={21}&images7={22}&images8={23}&phoneversion={24}&rd={25}&auth={26}",
                                                "addgames", gameModel.GameType, gameModel.GameName, gameModel.Version, gameModel.GameID, gameModel.PusherName, gameModel.UpdateTime, gameModel.GameDetails, gameModel.LogoPath, gameModel.SourceType, gameModel.DownloadCount,
-                                               gameModel.Price, gameModel.FileSize, gameModel.Starts, gameModel.HeadImage, gameModel.Rating, gameModel.Images1, gameModel.Images2, gameModel.Images3, gameModel.Images4, gameModel.Images5, gameModel.Images6, gameModel.Images7, gameModel.Images8, gameModel.PhoneVersion);
+                                               gameModel.Price, gameModel.FileSize, gameModel.Starts, gameModel.HeadImage, gameModel.Rating, gameModel.Images1, gameModel.Images2, gameModel.Images3, gameModel.Images4, gameModel.Images5, gameModel.Images6, gameModel.Images7, gameModel.Images8, gameModel.PhoneVersion,
+                                               timeAuth,cryptStr);
 
                 string result = HttpHelper.HTTP_POST("http://recommendgames.pettostudio.net/RecommendGames.aspx", dataStr);
                 //string result = HttpHelper.HTTP_POST("http://localhost:21422/RecommendGames.aspx", dataStr);

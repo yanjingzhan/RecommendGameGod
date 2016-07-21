@@ -20,7 +20,7 @@ namespace UtilityLibs
             HtmlAgilityPack.HtmlNodeCollection clooection = doc.DocumentNode.SelectNodes("//div[@class=\"grid_item visor-article-teaser list_default\"]");
 
             List<NewsInfoForJson> result = new List<NewsInfoForJson>();
-            if (clooection.Count > 0)
+            if (clooection != null && clooection.Count > 0)
             {
                 foreach (var c in clooection)
                 {

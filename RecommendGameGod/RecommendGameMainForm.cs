@@ -634,7 +634,6 @@ namespace RecommendGameGod
                     SetEditInfo("正在更新...");
                     await Task.Delay(TimeSpan.FromSeconds(0.1));
 
-
                     List<GameModel> gl_t = new List<GameModel>();
 
                     foreach (var item in _gameList)
