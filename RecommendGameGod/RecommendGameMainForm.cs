@@ -167,7 +167,8 @@ namespace RecommendGameGod
                 PusherName = this.textBox_PusherName.Text,
                 SourceType = this.checkBox_SourceType.Checked ? "header" : "list",
                 Version = this.textBox_Version.Text,
-                UpdateTime = this.dateTimePicker_UpdateTime.Value.ToString("yyyy-MM-dd HH:mm:ss")
+                UpdateTime = this.dateTimePicker_UpdateTime.Value.ToString("yyyy-MM-dd HH:mm:ss"),
+                IsTopmost = this.checkBox_IsTopmost.Checked
             };
 
             if (!checkBox_LogoPath.Checked)
@@ -506,6 +507,7 @@ namespace RecommendGameGod
                 ListViewItem lvi = new ListViewItem();
                 lvi.SubItems[0] = new ListViewItem.ListViewSubItem { Text = (count++).ToString() };
                 lvi.SubItems.Add(item.GameName);
+                lvi.SubItems.Add(item.RealDownCount.ToString());
                 lvi.SubItems.Add(item.GameType);
                 lvi.SubItems.Add(item.PhoneVersion);
                 lvi.SubItems.Add(item.Order.ToString());
@@ -535,19 +537,19 @@ namespace RecommendGameGod
                 this.listView_GameList.Items[CurrentIndex - 1] = (ListViewItem)this.listView_GameList.Items[CurrentIndex].Clone();
                 this.listView_GameList.Items[CurrentIndex] = i;
 
-                string order_t = this.listView_GameList.Items[CurrentIndex].SubItems[4].Text;
-                this.listView_GameList.Items[CurrentIndex].SubItems[4].Text = this.listView_GameList.Items[CurrentIndex - 1].SubItems[4].Text;
-                this.listView_GameList.Items[CurrentIndex - 1].SubItems[4].Text = order_t;
+                string order_t = this.listView_GameList.Items[CurrentIndex].SubItems[5].Text;
+                this.listView_GameList.Items[CurrentIndex].SubItems[5].Text = this.listView_GameList.Items[CurrentIndex - 1].SubItems[5].Text;
+                this.listView_GameList.Items[CurrentIndex - 1].SubItems[5].Text = order_t;
 
                 this.listView_GameList.Items[CurrentIndex - 1].Selected = true;
 
                 this.listView_GameList.EndUpdate();
 
-                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex - 1].SubItems[6].Text,
-                    this.listView_GameList.Items[CurrentIndex - 1].SubItems[4].Text);
+                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex - 1].SubItems[7].Text,
+                    this.listView_GameList.Items[CurrentIndex - 1].SubItems[5].Text);
 
-                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex].SubItems[6].Text,
-                    this.listView_GameList.Items[CurrentIndex].SubItems[4].Text);
+                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex].SubItems[7].Text,
+                    this.listView_GameList.Items[CurrentIndex].SubItems[5].Text);
 
                 this.listView_GameList.Items[CurrentIndex - 1].EnsureVisible();
             }
@@ -572,19 +574,19 @@ namespace RecommendGameGod
                 this.listView_GameList.Items[CurrentIndex + 1] = (ListViewItem)this.listView_GameList.Items[CurrentIndex].Clone();
                 this.listView_GameList.Items[CurrentIndex] = i;
 
-                string order_t = this.listView_GameList.Items[CurrentIndex].SubItems[4].Text;
-                this.listView_GameList.Items[CurrentIndex].SubItems[4].Text = this.listView_GameList.Items[CurrentIndex + 1].SubItems[4].Text;
-                this.listView_GameList.Items[CurrentIndex + 1].SubItems[4].Text = order_t;
+                string order_t = this.listView_GameList.Items[CurrentIndex].SubItems[5].Text;
+                this.listView_GameList.Items[CurrentIndex].SubItems[5].Text = this.listView_GameList.Items[CurrentIndex + 1].SubItems[5].Text;
+                this.listView_GameList.Items[CurrentIndex + 1].SubItems[5].Text = order_t;
 
                 this.listView_GameList.Items[CurrentIndex + 1].Selected = true;
 
                 this.listView_GameList.EndUpdate();
 
-                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex + 1].SubItems[6].Text,
-                    this.listView_GameList.Items[CurrentIndex + 1].SubItems[4].Text);
+                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex + 1].SubItems[7].Text,
+                    this.listView_GameList.Items[CurrentIndex + 1].SubItems[5].Text);
 
-                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex].SubItems[6].Text,
-                    this.listView_GameList.Items[CurrentIndex].SubItems[4].Text);
+                UpdateGameListOrderById(this.listView_GameList.Items[CurrentIndex].SubItems[7].Text,
+                    this.listView_GameList.Items[CurrentIndex].SubItems[5].Text);
 
                 this.listView_GameList.Items[CurrentIndex + 1].EnsureVisible();
             }
@@ -638,7 +640,7 @@ namespace RecommendGameGod
 
                     foreach (var item in _gameList)
                     {
-                        gl_t.Add(new GameModel { ID = item.ID, Order = item.Order });
+                        gl_t.Add(new GameModel { ID = item.ID, Order = item.Order, IsTopmost = item.IsTopmost });
                     }
 
                     HttpDataHelper.UpdateOrderForGame(gl_t);
@@ -648,6 +650,33 @@ namespace RecommendGameGod
                 catch (Exception ex)
                 { SetEditInfo("更新失败," + ex.Message); }
             }
+        }
+
+        private void listView_GameList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listView_GameList.SelectedItems.Count > 0)
+            {
+                this.checkBox_Edit_IsTopmost.Checked = GetGameModelFromGameList(this.listView_GameList.SelectedItems[0].SubItems[7].Text).IsTopmost;
+            }
+        }
+
+        private GameModel GetGameModelFromGameList(string id)
+        {
+            foreach (var item in _gameList)
+            {
+                if (item.ID == id)
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
+        private void checkBox_Edit_IsTopmost_CheckedChanged(object sender, EventArgs e)
+        {
+            GetGameModelFromGameList(this.listView_GameList.SelectedItems[0].SubItems[7].Text).IsTopmost = checkBox_Edit_IsTopmost.Checked;
+            this.listView_GameList.Focus();
         }
     }
 }

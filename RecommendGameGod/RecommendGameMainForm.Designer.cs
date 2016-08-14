@@ -49,6 +49,7 @@
             this.pictureBox_Header = new System.Windows.Forms.PictureBox();
             this.checkBox_UploadImages = new System.Windows.Forms.CheckBox();
             this.checkBox_LogoPath = new System.Windows.Forms.CheckBox();
+            this.checkBox_IsTopmost = new System.Windows.Forms.CheckBox();
             this.checkBox_SourceType = new System.Windows.Forms.CheckBox();
             this.textBox_GameID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -96,21 +97,23 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.textBox_Edit_Info = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox_Edit_IsTopmost = new System.Windows.Forms.CheckBox();
+            this.button_Edit_OrderBottom = new System.Windows.Forms.Button();
+            this.button_Edit_OrderMoveDown = new System.Windows.Forms.Button();
+            this.button_Edit_OrderMoveUp = new System.Windows.Forms.Button();
+            this.button_Edit_TopOrder = new System.Windows.Forms.Button();
+            this.button_Edit_UpdateGameList = new System.Windows.Forms.Button();
             this.listView_GameList = new System.Windows.Forms.ListView();
+            this.columnHeader_Num = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_GameType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_PhoneVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.columnHeader_Order = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_GameDetails = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button_Edit_GetGameList = new System.Windows.Forms.Button();
-            this.button_Edit_UpdateGameList = new System.Windows.Forms.Button();
-            this.button_Edit_TopOrder = new System.Windows.Forms.Button();
-            this.button_Edit_OrderMoveUp = new System.Windows.Forms.Button();
-            this.button_Edit_OrderMoveDown = new System.Windows.Forms.Button();
-            this.button_Edit_OrderBottom = new System.Windows.Forms.Button();
-            this.columnHeader_Num = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button_Edit_GetGameList = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.columnHeader_RealDownCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -172,6 +175,7 @@
             this.panel3.Controls.Add(this.pictureBox_Header);
             this.panel3.Controls.Add(this.checkBox_UploadImages);
             this.panel3.Controls.Add(this.checkBox_LogoPath);
+            this.panel3.Controls.Add(this.checkBox_IsTopmost);
             this.panel3.Controls.Add(this.checkBox_SourceType);
             this.panel3.Controls.Add(this.textBox_GameID);
             this.panel3.Controls.Add(this.label2);
@@ -406,6 +410,16 @@
             this.checkBox_LogoPath.Text = "本地上传Logo";
             this.checkBox_LogoPath.UseVisualStyleBackColor = true;
             this.checkBox_LogoPath.CheckedChanged += new System.EventHandler(this.checkBox_LogoPath_CheckedChanged);
+            // 
+            // checkBox_IsTopmost
+            // 
+            this.checkBox_IsTopmost.AutoSize = true;
+            this.checkBox_IsTopmost.Location = new System.Drawing.Point(452, 159);
+            this.checkBox_IsTopmost.Name = "checkBox_IsTopmost";
+            this.checkBox_IsTopmost.Size = new System.Drawing.Size(119, 19);
+            this.checkBox_IsTopmost.TabIndex = 22;
+            this.checkBox_IsTopmost.Text = "是否人工置顶";
+            this.checkBox_IsTopmost.UseVisualStyleBackColor = true;
             // 
             // checkBox_SourceType
             // 
@@ -841,6 +855,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBox_Edit_IsTopmost);
             this.panel1.Controls.Add(this.button_Edit_OrderBottom);
             this.panel1.Controls.Add(this.button_Edit_OrderMoveDown);
             this.panel1.Controls.Add(this.button_Edit_OrderMoveUp);
@@ -854,6 +869,74 @@
             this.panel1.Size = new System.Drawing.Size(1190, 201);
             this.panel1.TabIndex = 0;
             // 
+            // checkBox_Edit_IsTopmost
+            // 
+            this.checkBox_Edit_IsTopmost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_Edit_IsTopmost.AutoSize = true;
+            this.checkBox_Edit_IsTopmost.Location = new System.Drawing.Point(1097, 8);
+            this.checkBox_Edit_IsTopmost.Name = "checkBox_Edit_IsTopmost";
+            this.checkBox_Edit_IsTopmost.Size = new System.Drawing.Size(59, 19);
+            this.checkBox_Edit_IsTopmost.TabIndex = 3;
+            this.checkBox_Edit_IsTopmost.Text = "置顶";
+            this.checkBox_Edit_IsTopmost.UseVisualStyleBackColor = true;
+            this.checkBox_Edit_IsTopmost.CheckedChanged += new System.EventHandler(this.checkBox_Edit_IsTopmost_CheckedChanged);
+            // 
+            // button_Edit_OrderBottom
+            // 
+            this.button_Edit_OrderBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Edit_OrderBottom.Location = new System.Drawing.Point(1097, 159);
+            this.button_Edit_OrderBottom.Name = "button_Edit_OrderBottom";
+            this.button_Edit_OrderBottom.Size = new System.Drawing.Size(90, 36);
+            this.button_Edit_OrderBottom.TabIndex = 2;
+            this.button_Edit_OrderBottom.Text = "底部";
+            this.button_Edit_OrderBottom.UseVisualStyleBackColor = true;
+            this.button_Edit_OrderBottom.Click += new System.EventHandler(this.button_Edit_OrderBottom_Click);
+            // 
+            // button_Edit_OrderMoveDown
+            // 
+            this.button_Edit_OrderMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Edit_OrderMoveDown.Location = new System.Drawing.Point(1097, 117);
+            this.button_Edit_OrderMoveDown.Name = "button_Edit_OrderMoveDown";
+            this.button_Edit_OrderMoveDown.Size = new System.Drawing.Size(90, 36);
+            this.button_Edit_OrderMoveDown.TabIndex = 2;
+            this.button_Edit_OrderMoveDown.Text = "下移";
+            this.button_Edit_OrderMoveDown.UseVisualStyleBackColor = true;
+            this.button_Edit_OrderMoveDown.Click += new System.EventHandler(this.button_Edit_OrderMoveDown_Click);
+            // 
+            // button_Edit_OrderMoveUp
+            // 
+            this.button_Edit_OrderMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Edit_OrderMoveUp.Location = new System.Drawing.Point(1097, 75);
+            this.button_Edit_OrderMoveUp.Name = "button_Edit_OrderMoveUp";
+            this.button_Edit_OrderMoveUp.Size = new System.Drawing.Size(90, 36);
+            this.button_Edit_OrderMoveUp.TabIndex = 2;
+            this.button_Edit_OrderMoveUp.Text = "上移";
+            this.button_Edit_OrderMoveUp.UseVisualStyleBackColor = true;
+            this.button_Edit_OrderMoveUp.Click += new System.EventHandler(this.button_Edit_OrderMoveUp_Click);
+            // 
+            // button_Edit_TopOrder
+            // 
+            this.button_Edit_TopOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Edit_TopOrder.Location = new System.Drawing.Point(1097, 33);
+            this.button_Edit_TopOrder.Name = "button_Edit_TopOrder";
+            this.button_Edit_TopOrder.Size = new System.Drawing.Size(90, 36);
+            this.button_Edit_TopOrder.TabIndex = 2;
+            this.button_Edit_TopOrder.Text = "最顶";
+            this.button_Edit_TopOrder.UseVisualStyleBackColor = true;
+            this.button_Edit_TopOrder.Click += new System.EventHandler(this.button_Edit_TopOrder_Click);
+            // 
+            // button_Edit_UpdateGameList
+            // 
+            this.button_Edit_UpdateGameList.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_Edit_UpdateGameList.ForeColor = System.Drawing.Color.Red;
+            this.button_Edit_UpdateGameList.Location = new System.Drawing.Point(5, 120);
+            this.button_Edit_UpdateGameList.Name = "button_Edit_UpdateGameList";
+            this.button_Edit_UpdateGameList.Size = new System.Drawing.Size(129, 75);
+            this.button_Edit_UpdateGameList.TabIndex = 1;
+            this.button_Edit_UpdateGameList.Text = "更新游戏列表";
+            this.button_Edit_UpdateGameList.UseVisualStyleBackColor = true;
+            this.button_Edit_UpdateGameList.Click += new System.EventHandler(this.button_Edit_UpdateGameList_Click);
+            // 
             // listView_GameList
             // 
             this.listView_GameList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -861,6 +944,7 @@
             this.listView_GameList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader_Num,
             this.columnHeader_Name,
+            this.columnHeader_RealDownCount,
             this.columnHeader_GameType,
             this.columnHeader_PhoneVersion,
             this.columnHeader_Order,
@@ -868,23 +952,29 @@
             this.columnHeader_ID});
             this.listView_GameList.FullRowSelect = true;
             this.listView_GameList.GridLines = true;
-            this.listView_GameList.Location = new System.Drawing.Point(142, 3);
+            this.listView_GameList.Location = new System.Drawing.Point(140, 0);
             this.listView_GameList.MultiSelect = false;
             this.listView_GameList.Name = "listView_GameList";
             this.listView_GameList.Size = new System.Drawing.Size(949, 201);
             this.listView_GameList.TabIndex = 0;
             this.listView_GameList.UseCompatibleStateImageBehavior = false;
             this.listView_GameList.View = System.Windows.Forms.View.Details;
+            this.listView_GameList.SelectedIndexChanged += new System.EventHandler(this.listView_GameList_SelectedIndexChanged);
+            // 
+            // columnHeader_Num
+            // 
+            this.columnHeader_Num.Text = "序号";
+            this.columnHeader_Num.Width = 56;
             // 
             // columnHeader_Name
             // 
             this.columnHeader_Name.Text = "游戏名称";
-            this.columnHeader_Name.Width = 252;
+            this.columnHeader_Name.Width = 187;
             // 
             // columnHeader_GameType
             // 
             this.columnHeader_GameType.Text = "类型";
-            this.columnHeader_GameType.Width = 251;
+            this.columnHeader_GameType.Width = 172;
             // 
             // columnHeader_PhoneVersion
             // 
@@ -901,6 +991,11 @@
             this.columnHeader_GameDetails.Text = "详细信息";
             this.columnHeader_GameDetails.Width = 77;
             // 
+            // columnHeader_ID
+            // 
+            this.columnHeader_ID.Text = "ID";
+            this.columnHeader_ID.Width = 1;
+            // 
             // button_Edit_GetGameList
             // 
             this.button_Edit_GetGameList.Location = new System.Drawing.Point(5, 3);
@@ -911,71 +1006,10 @@
             this.button_Edit_GetGameList.UseVisualStyleBackColor = true;
             this.button_Edit_GetGameList.Click += new System.EventHandler(this.button_Edit_GetGameList_Click);
             // 
-            // button_Edit_UpdateGameList
+            // columnHeader_RealDownCount
             // 
-            this.button_Edit_UpdateGameList.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_Edit_UpdateGameList.ForeColor = System.Drawing.Color.Red;
-            this.button_Edit_UpdateGameList.Location = new System.Drawing.Point(5, 120);
-            this.button_Edit_UpdateGameList.Name = "button_Edit_UpdateGameList";
-            this.button_Edit_UpdateGameList.Size = new System.Drawing.Size(129, 75);
-            this.button_Edit_UpdateGameList.TabIndex = 1;
-            this.button_Edit_UpdateGameList.Text = "更新游戏列表";
-            this.button_Edit_UpdateGameList.UseVisualStyleBackColor = true;
-            this.button_Edit_UpdateGameList.Click += new System.EventHandler(this.button_Edit_UpdateGameList_Click);
-            // 
-            // button_Edit_TopOrder
-            // 
-            this.button_Edit_TopOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Edit_TopOrder.Location = new System.Drawing.Point(1097, 3);
-            this.button_Edit_TopOrder.Name = "button_Edit_TopOrder";
-            this.button_Edit_TopOrder.Size = new System.Drawing.Size(90, 36);
-            this.button_Edit_TopOrder.TabIndex = 2;
-            this.button_Edit_TopOrder.Text = "置顶";
-            this.button_Edit_TopOrder.UseVisualStyleBackColor = true;
-            this.button_Edit_TopOrder.Click += new System.EventHandler(this.button_Edit_TopOrder_Click);
-            // 
-            // button_Edit_OrderMoveUp
-            // 
-            this.button_Edit_OrderMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Edit_OrderMoveUp.Location = new System.Drawing.Point(1097, 62);
-            this.button_Edit_OrderMoveUp.Name = "button_Edit_OrderMoveUp";
-            this.button_Edit_OrderMoveUp.Size = new System.Drawing.Size(90, 36);
-            this.button_Edit_OrderMoveUp.TabIndex = 2;
-            this.button_Edit_OrderMoveUp.Text = "上移";
-            this.button_Edit_OrderMoveUp.UseVisualStyleBackColor = true;
-            this.button_Edit_OrderMoveUp.Click += new System.EventHandler(this.button_Edit_OrderMoveUp_Click);
-            // 
-            // button_Edit_OrderMoveDown
-            // 
-            this.button_Edit_OrderMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Edit_OrderMoveDown.Location = new System.Drawing.Point(1097, 104);
-            this.button_Edit_OrderMoveDown.Name = "button_Edit_OrderMoveDown";
-            this.button_Edit_OrderMoveDown.Size = new System.Drawing.Size(90, 36);
-            this.button_Edit_OrderMoveDown.TabIndex = 2;
-            this.button_Edit_OrderMoveDown.Text = "下移";
-            this.button_Edit_OrderMoveDown.UseVisualStyleBackColor = true;
-            this.button_Edit_OrderMoveDown.Click += new System.EventHandler(this.button_Edit_OrderMoveDown_Click);
-            // 
-            // button_Edit_OrderBottom
-            // 
-            this.button_Edit_OrderBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Edit_OrderBottom.Location = new System.Drawing.Point(1097, 159);
-            this.button_Edit_OrderBottom.Name = "button_Edit_OrderBottom";
-            this.button_Edit_OrderBottom.Size = new System.Drawing.Size(90, 36);
-            this.button_Edit_OrderBottom.TabIndex = 2;
-            this.button_Edit_OrderBottom.Text = "底部";
-            this.button_Edit_OrderBottom.UseVisualStyleBackColor = true;
-            this.button_Edit_OrderBottom.Click += new System.EventHandler(this.button_Edit_OrderBottom_Click);
-            // 
-            // columnHeader_Num
-            // 
-            this.columnHeader_Num.Text = "序号";
-            this.columnHeader_Num.Width = 56;
-            // 
-            // columnHeader_ID
-            // 
-            this.columnHeader_ID.Text = "ID";
-            this.columnHeader_ID.Width = 1;
+            this.columnHeader_RealDownCount.Text = "真实下载数";
+            this.columnHeader_RealDownCount.Width = 115;
             // 
             // RecommendGameMainForm
             // 
@@ -1006,6 +1040,7 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1094,6 +1129,9 @@
         private System.Windows.Forms.Button button_Edit_GetGameList;
         private System.Windows.Forms.ColumnHeader columnHeader_Num;
         private System.Windows.Forms.ColumnHeader columnHeader_ID;
+        private System.Windows.Forms.CheckBox checkBox_IsTopmost;
+        private System.Windows.Forms.CheckBox checkBox_Edit_IsTopmost;
+        private System.Windows.Forms.ColumnHeader columnHeader_RealDownCount;
     }
 }
 

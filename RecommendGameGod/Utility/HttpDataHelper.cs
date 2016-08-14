@@ -97,6 +97,7 @@ namespace RecommendGameGod.Utility
 
                 string result_str = wc.DownloadString(
                     string.Format("http://recommendgames.pettostudio.net/RecommendGames.aspx?action=getgamelist&getCount=1000&pageNumber=0&rd={0}&auth={1}", timeAuth, cryptStr));
+                    //string.Format("http://localhost:21422/RecommendGames.aspx?action=getgamelist&getCount=1000&pageNumber=0&rd={0}&auth={1}", timeAuth, cryptStr));
                 List<GameModel> result = JsonHelper.DeserializeObjectFromJson<List<GameModel>>(Encryption.Decrypt(result_str));
 
                 foreach (var gameModel in result)
