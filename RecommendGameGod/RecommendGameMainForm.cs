@@ -165,7 +165,7 @@ namespace RecommendGameGod
                 PhoneVersion = this.comboBox_PhoneVersion.Text,
                 Price = this.comboBox_Price.Text,
                 PusherName = this.textBox_PusherName.Text,
-                SourceType = this.checkBox_SourceType.Checked ? "header" : "list",
+                SourceType = this.checkBox_SourceType.Checked ? "header" : (this.checkBox_IsConner.Checked ? "conner" : "list"),
                 Version = this.textBox_Version.Text,
                 UpdateTime = this.dateTimePicker_UpdateTime.Value.ToString("yyyy-MM-dd HH:mm:ss"),
                 IsTopmost = this.checkBox_IsTopmost.Checked
@@ -192,6 +192,16 @@ namespace RecommendGameGod
 
                 HttpDataHelper.UploadImage(Path.Combine(_tempDir, this.textBox_GameName.Text + "_header.png"));
                 gameModel_t.HeadImage = string.Format("http://recommendgames.pettostudio.net/resoures/wp/images/{0}_header.png",
+                    this.textBox_GameName.Text);
+            }
+
+            if (checkBox_IsConner.Checked)
+            {
+                ImageHelper.GetPicThumbnail(this.pictureBox_Header.ImageLocation, Path.Combine(_tempDir, this.textBox_GameName.Text + "_conner.png"),
+                   pictureBox_Header.Image.Width, pictureBox_Header.Image.Height, 80);
+
+                HttpDataHelper.UploadImage(Path.Combine(_tempDir, this.textBox_GameName.Text + "_conner.png"));
+                gameModel_t.HeadImage = string.Format("http://recommendgames.pettostudio.net/resoures/wp/images/{0}_conner.png",
                     this.textBox_GameName.Text);
             }
 
@@ -299,7 +309,14 @@ namespace RecommendGameGod
 
         private void checkBox_SourceType_CheckedChanged(object sender, EventArgs e)
         {
-            this.pictureBox_Header.Visible = checkBox_SourceType.Checked;
+            checkBox_IsConner.Checked = false;
+            this.pictureBox_Header.Visible = checkBox_SourceType.Checked || checkBox_IsConner.Checked;
+        }
+
+        private void checkBox_IsConner_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox_SourceType.Checked = false;
+            this.pictureBox_Header.Visible = checkBox_SourceType.Checked || checkBox_IsConner.Checked;
         }
 
         private void checkBox_LogoPath_CheckedChanged(object sender, EventArgs e)
